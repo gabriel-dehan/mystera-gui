@@ -2,16 +2,45 @@
   "name": "mystera-gui",
   "version": "0.1.0",
   "private": true,
+  "author": {
+    "name": "Gabriel Dehan",
+    "email": "",
+    "url": ""
+  },
   "dependencies": {
+    "electron-is-dev": "^1.1.0",
+    "kbm-robot": "^0.0.4",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
-    "react-scripts": "3.2.0"
+    "react-scripts": "3.2.0",
+    "styled-components": "^4.4.0"
   },
+  "main": "public/electron.js",
+  "homepage": "./",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "rescripts start",
+    "build": "rescripts build",
+    "test": "rescripts test",
+    "eject": "react-scripts eject",
+    "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
+    "postinstall": "electron-builder install-app-deps",
+    "preelectron-pack": "yarn build",
+    "electron-pack": "build -mw"
+  },
+  "build": {
+    "appId": "com.mystera.gui",
+    "productName": "Mystera Gui",
+    "copyright": "WTFPL",
+    "mac": {
+      "category": "public.app-category.games"
+    },
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    }
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -27,5 +56,15 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@rescripts/cli": "^0.0.13",
+    "@rescripts/rescript-env": "^0.0.11",
+    "babel-plugin-styled-components": "^1.10.6",
+    "babel-plugin-webpack-alias": "^2.1.2",
+    "concurrently": "^5.0.0",
+    "electron": "^7.0.0",
+    "electron-builder": "^21.2.0",
+    "wait-on": "^3.3.0"
   }
 }
