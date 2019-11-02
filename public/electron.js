@@ -1,7 +1,4 @@
-const electron = require('electron');
-const app = electron.app;
-const BrowserWindow = electron.BrowserWindow;
-
+const { BrowserWindow, app, screen } = require('electron');
 const path = require('path');
 const isDev = require('electron-is-dev');
 const robot = require("../src/Vendor/kbm-robot/kbm-robot");
@@ -10,10 +7,11 @@ let mainWindow;
 
 function createWindow() {
   robot.startJar(app.getAppPath());
-  
+  const { width, height } = screen.getPrimaryDisplay().workAreaSize;
+
   mainWindow = new BrowserWindow({
-    width: 900, 
-    height: 680, 
+    width: width, 
+    height: height, 
     webPreferences: {
       nodeIntegration: true
     }
@@ -28,6 +26,7 @@ function createWindow() {
   mainWindow.on('closed', () => mainWindow = null);
   
   mainWindow.robot = robot;
+  mainWindow.getCursorPosition = () => screen.getCursorScreenPoint();
 }
 
 app.on('ready', createWindow);

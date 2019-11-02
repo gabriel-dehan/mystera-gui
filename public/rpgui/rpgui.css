@@ -460,8 +460,9 @@ ul.rpgui-dropdown-imp {
 /* shows the currently selected value from select element */
 .rpgui-content .rpgui-dropdown-imp-header {
   color: white !important;
-  min-height: 22px !important;
-  padding: 5px 10px 0 10px !important;
+  height: 20px !important;
+  min-height: 20px !important;
+  padding: 2px 10px 0 10px !important;
   margin: 0 0 0 0 !important;
   position: relative !important; }
 

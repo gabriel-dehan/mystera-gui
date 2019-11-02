@@ -8,6 +8,7 @@ export const Loader = styled.div`
   left: 0;
   background: black;
   color: white;
+  z-index: 1000;
 
   padding-top: 40vh;
   font-size: 2em;
