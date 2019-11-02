@@ -1,3 +1,6 @@
 {
-  "plugins": ["babel-plugin-styled-components",  "babel-plugin-webpack-alias"]
+  "plugins": [
+    ["babel-plugin-styled-components"],  
+    ["babel-plugin-webpack-alias"]
+  ]
 }

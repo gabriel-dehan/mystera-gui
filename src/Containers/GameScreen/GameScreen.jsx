@@ -1,40 +1,60 @@
-import React, { Component, Fragment } from 'react';
-import { remote }  from 'electron';
+import React, { Component } from 'react';
+import InterfaceController, { Symbols } from '../../Providers/InterfaceController';
+import InterfaceListener from '../../Providers/InterfaceListener';
 
+import Header from '../Header/Header';
+import Sidebar from '../Sidebar/Sidebar';
 import { 
+  Container,
+  GameContainer,
   Game, 
-  Container 
+  Loader
 } from './GameScreenStyles.jsx'
 
-const { robot } = remote.getCurrentWindow();
-
+// @interfaceController
 class GameScreen extends Component {
+  state = {
+    loaded: false
+  }
+
+  loadingDelay = 1;// || 2500;
+
+  componentDidMount() {
+    // We can't listen to keyboard events in an iframe but we need to capture keys so we use electronLocalshortcut to do so
+    this.props.startListening();
+  }
+
+  componentWillUnmount() {
+    this.props.stopListening();
+  }
+
   onClick(e) {   
-    robot.mouseMove(150, 150)
-      .press("tab")
-      .sleep(50)
-      .release("tab")
-      .press("enter")
-      .sleep(50)
-      .release("enter")
-      .sleep(100)
-      .typeString("Hello World!")
-      .go(function() {
-        console.log('MOVED');
-      })
+    this.props.controller.execute(Symbols.SKILL_MENU);
+  }
+
+  onLoad() {
+    setTimeout(() => this.setState({ loaded: true }), this.loadingDelay);
   }
 
   render() {
     return (
-      <Container>
-        <Game 
-          src='https://www.mysteralegacy.com/play/full.php' 
-          frameBorder='0'>
-        </Game>
-        <button onClick={(e) => this.onClick(e)}>CLICK ME MOFO</button>
+      <Container className="rpgui-content">
+        {!this.state.loaded && 
+        <Loader>Loading...</Loader>
+        }
+        <Header />
+        <GameContainer>
+          <Game 
+            className="rpgui-container framed-dark"
+            onLoad={(e) => this.onLoad(e)}
+            src='https://www.mysteralegacy.com/play/full.php' 
+            frameBorder='0'>
+          </Game>
+          <Sidebar />
+        </GameContainer>
       </Container>
     );
   }
 }
 
-export default GameScreen;
+export default InterfaceListener(InterfaceController(GameScreen));

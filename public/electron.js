@@ -11,7 +11,6 @@ let mainWindow;
 function createWindow() {
   robot.startJar(app.getAppPath());
   
-
   mainWindow = new BrowserWindow({
     width: 900, 
     height: 680, 
