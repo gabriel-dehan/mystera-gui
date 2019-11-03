@@ -8,7 +8,8 @@ import {
   Container,
   GameContainer,
   Game, 
-  Loader
+  Loader,
+  ClickOverlay
 } from './GameScreenStyles.jsx'
 
 // @interfaceController
@@ -21,8 +22,9 @@ class GameScreen extends Component {
 
   componentDidMount() {
     // We can't listen to keyboard events in an iframe but we need to capture keys so we use electronLocalshortcut to do so
-    //this.props.startListening();
+    console.log('HELLO');
     this.props.listener.start();
+    this.props.listener.commandAnalyzer();
 
     // Send the current game window to the InterfaceController and InterfaceListener so that they knows what to work on
     this.props.controller.setCurrentGameWindow(document.querySelector('iframe'));
@@ -48,6 +50,7 @@ class GameScreen extends Component {
         }
         <Header />
         <GameContainer>
+          <ClickOverlay onClick={() => console.log('CLICK')} />
           <Game 
             className="rpgui-container framed-dark"
             onLoad={(e) => this.onLoad(e)}
