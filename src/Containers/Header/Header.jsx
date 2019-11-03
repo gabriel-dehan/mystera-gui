@@ -1,33 +1,53 @@
 import React, { Component } from 'react';
 import InterfaceController, { Symbols } from '../../Providers/InterfaceController';
+import withStore from '../../Providers/withStore';
+import UI from '../../Config/UIMappings';
+
 import Button from '../../Components/Button/Button';
 import HelpWindow from '../../Components/HelpWindow/HelpWindow';
-import UIServersPositions from '../../Config/UIServersPositions';
+
 import { 
   Container,
   Column,
   ServerSelect,
+  Play,
+  Separator
 } from './HeaderStyles.jsx'
+
 import Help from '../../Assets/Images/Icons/help.png'
 
 class Header extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    
     this.serverSelect = React.createRef();
   }
+
   state = {
-    displayHelp: false
+    displayHelp: false,
+    serverClicked: false,
   }
 
   componentDidMount() {
-    this.serverSelect.current.addEventListener('change', (e) => this.clickServer(e));
+    this.serverSelect.current.addEventListener('change', (e) => this.selectServer(e));
   }
 
+  selectServer(e) {   
+    const serverId = e.target.value;
+    this.props.store.set('user.server', serverId);
+  }
 
-  clickServer(e) {   
-    const { x, y } = UIServersPositions[e.target.value].coordinates;
-    
+  clickServer() {
+    const serverId =  this.props.store.get('user.server');
+    const { x, y } = UI.servers[serverId].coordinates;
+    const loginX = UI.login.coordinates.x;
+    const loginY = UI.login.coordinates.y;
+
     this.props.controller.clickThenGoBack(x, y);
+    this.props.controller.wait(1000);
+    this.props.controller.clickThenGoBack(loginX, loginY);
+
+    this.setState({ serverClicked: true });
   }
 
   toggleHelp() {
@@ -35,6 +55,8 @@ class Header extends Component {
   }
 
   render() {
+    const defaultServer = this.props.store.get('user.server');
+        
     return (
       <Container className="rpgui-container framed-dark-grey">
         {this.state.displayHelp && 
@@ -42,14 +64,18 @@ class Header extends Component {
         }
 
         <Column right>
-          <ServerSelect>
-            <select className="rpgui-dropdown" ref={this.serverSelect}>
-              {Object.keys(UIServersPositions).map((serverId) => {
-                const server = UIServersPositions[serverId];
-                return <option key={serverId} value={serverId}>{server.name}</option>;
-              })}
-            </select>
-          </ServerSelect>
+          <React.Fragment>
+            <ServerSelect>
+              <select className="rpgui-dropdown" defaultValue={defaultServer} ref={this.serverSelect}>
+                {Object.keys(UI.servers).map((serverId) => {
+                  const server = UI.servers[serverId];
+                  return <option key={serverId} value={serverId}>{server.name}</option>;
+                })}
+              </select>
+            </ServerSelect>
+            <Play onClick={() => this.clickServer()} disabled={this.state.serverClicked} className="rpgui-button">Go</Play>
+          </React.Fragment>
+          <Separator />
           <Button 
             icon={Help} 
             iconSize="small"
@@ -61,4 +87,4 @@ class Header extends Component {
   }
 }
 
-export default InterfaceController(Header);
+export default withStore(InterfaceController(Header));

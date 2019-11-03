@@ -1,0 +1,48 @@
+{
+  "servers": {
+    "europe": {
+      "name": "Europe",
+      "coordinates": { "x": 550, "y": 365 }
+    },
+    "london": {
+      "name": "London",
+      "coordinates": { "x": 405, "y": 365 }
+    },
+    "us-texas": {
+      "name": "US Texas",
+      "coordinates": { "x": 480, "y": 320 }
+    },
+    "us-west": {
+      "name": "US West",
+      "coordinates": { "x": 280, "y": 320 }
+    },
+    "us-west2": {
+      "name": "US West 2",
+      "coordinates": { "x": 260, "y": 365 }
+    },
+    "us-east": {
+      "name": "US East",
+      "coordinates": { "x": 685, "y": 320 }
+    },
+    "us-east2": {
+      "name": "US East 2",
+      "coordinates": { "x": 700, "y": 365 }
+    },
+    "sudamerica": {
+      "name": "Sudamérica",
+      "coordinates": { "x": 280, "y": 420 }
+    },
+    "brasil": {
+      "name": "Brasil",
+      "coordinates": { "x": 480, "y": 420 }
+    },
+    "se-asia": {
+      "name": "SE Asia",
+      "coordinates": { "x": 685, "y": 420 }
+    }
+  },
+  "login": {
+    "name": "Login",
+    "coordinates": { "x": 480, "y": 425 }
+  }
+}

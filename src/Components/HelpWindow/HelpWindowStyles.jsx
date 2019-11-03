@@ -8,6 +8,7 @@ export const Container = styled.div`
     min-height: 15vh;
     top: 16px;
     right: 12px;
+    z-index: 100;
   }
 `;
 

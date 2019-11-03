@@ -2,14 +2,18 @@ import React, { Component } from 'react';
 import { remote }  from 'electron';
 import electronLocalshortcut from 'electron-localshortcut';
 import Mappings from '../Config/Mappings';
-import { RobotController } from './InterfaceController';
+import { Controller } from './InterfaceController';
 
 class KeyboardListener {
   constructor() {
     this.mainWindow = remote.getCurrentWindow();
-    this.controller = new RobotController();
+    this.controller = Controller;
   }
   
+  setCurrentGameWindow(element) {
+    this.controller.setCurrentGameWindow(element);
+  }
+
   start() {
     Object.keys(Mappings).map((key) => {
       electronLocalshortcut.register(this.mainWindow, key, () => {
@@ -37,7 +41,7 @@ export default (Child) => {
 
     render() {
       return (
-        <Child {...this.props} startListening={() => this.listener.start()} stopListening={() => this.listener.stop()} />
+        <Child {...this.props} listener={this.listener} startListening={() => this.listener.start()} stopListening={() => this.listener.stop()} />
       )
     }
   }

@@ -12,6 +12,7 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: width, 
     height: height, 
+    minWidth: 840,
     webPreferences: {
       nodeIntegration: true
     }
@@ -27,6 +28,11 @@ function createWindow() {
   
   mainWindow.robot = robot;
   mainWindow.getCursorPosition = () => screen.getCursorScreenPoint();
+  mainWindow.baseGameWindow = { 
+    width: 930,
+    height: 522.66,
+    ratio: 930 / 522.66
+  }
 }
 
 app.on('ready', createWindow);
