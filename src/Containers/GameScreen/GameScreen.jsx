@@ -9,7 +9,6 @@ import {
   GameContainer,
   Game, 
   Loader,
-  ClickOverlay
 } from './GameScreenStyles.jsx'
 
 // @interfaceController
@@ -50,7 +49,6 @@ class GameScreen extends Component {
         }
         <Header />
         <GameContainer>
-          <ClickOverlay onClick={() => console.log('CLICK')} />
           <Game 
             className="rpgui-container framed-dark"
             onLoad={(e) => this.onLoad(e)}

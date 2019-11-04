@@ -32,12 +32,3 @@ export const Game = styled.iframe`
     background: initial;
   }
 `;
-
-export const ClickOverlay = styled.div`
-  opacity: 0.1;
-  background: black;
-  width: 800px;
-  height: 500px;
-  pointer-events: initial !important;
-  position: absolute;
-`;

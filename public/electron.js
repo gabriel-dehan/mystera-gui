@@ -29,6 +29,7 @@ function createWindow() {
   mainWindow.robot = robot;
   mainWindow.getCursorPosition = () => screen.getCursorScreenPoint();
   mainWindow.baseGameWindow = { 
+    border: 12,
     width: 930,
     height: 522.66,
     ratio: 930 / 522.66

@@ -12,17 +12,32 @@ class RobotController {
     this.robot = this.mainWindow.robot;
     this.cursorPosition = null;
     this.baseGameWindow = this.mainWindow.baseGameWindow;
-
   }
 
   setCurrentGameWindow(gameWindowElement) {
     this.gameWindow = gameWindowElement.getBoundingClientRect();
     
     // Remove the border of the iframe, ugly I know
-    this.gameWindow.width -= 24;
+    this.gameWindow.width -= this.baseGameWindow.border * 2;
     // No need for -24 because we are recomputing the height based on the game ratio (the iframe height is incorrect sometimes)
     this.gameWindow.height = this.gameWindow.width / this.baseGameWindow.ratio;
 
+  }
+
+  addClickListener(listener) {
+    this.robot.registerClickListener(listener);
+  }
+
+  removeClickListener() {
+    this.robot.unregisterClickListener();
+  }
+
+  addKeyboardListener(listener) {
+    this.robot.registerKeyboardListener(listener);
+  }
+
+  removeKeyboardListener() {
+    this.robot.unregisterKeyboardListener();
   }
   
   _positionToRelative(x, y) {
@@ -49,19 +64,6 @@ class RobotController {
     const { x, y } = this._positionToRelative(scaledX, scaledY);
 
     return { x: Math.round(x), y: Math.round(y) };
-  }
-
-  // Used to on the game screen before inputing keyboard commands
-  sceneFocus() {
-    // A bit ugly but works very well without needing to pass the component;
-    document.querySelector('iframe').contentWindow.focus();
-  }
-
-  leftClick() {
-    return this.robot.mouseClick(1);
-  }
-  rightClick() {
-    return this.robot.mouseClick(2);
   }
 
   // this.props.controller.moveCursorRelatively(x, y).go();
@@ -98,6 +100,15 @@ class RobotController {
     this.robot.sleep(amount);
   }
 
+
+  leftClick() {
+    return this.robot.mouseClick(1);
+  }
+  
+  rightClick() {
+    return this.robot.mouseClick(2);
+  }
+
   clickThenGoBack(x, y, sleep) {
     this.setTemporaryCursorPosition(x, y, () => {
       return this.leftClick();
@@ -110,6 +121,12 @@ class RobotController {
 
   clearCursorPosition() {
     return this.cursorPosition = null;
+  }
+
+  // Used to on the game screen before inputing keyboard commands
+  sceneFocus() {
+    // A bit ugly but works very well without needing to pass the component;
+    document.querySelector('iframe').contentWindow.focus();
   }
 
   execute(command) {
