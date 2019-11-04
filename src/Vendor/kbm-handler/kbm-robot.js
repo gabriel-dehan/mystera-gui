@@ -239,9 +239,9 @@ function kbmRobot() {
             var jarPath = null;
             
             if (ElectronRemote && ElectronRemote.app && ElectronRemote.app.getAppPath) {
-                jarPath = path.join(ElectronRemote.app.getAppPath(), "src", "vendor", "kbm-robot", "resources", "robot.jar");
+                jarPath = path.join(ElectronRemote.app.getAppPath(), "src", "vendor", "kbm-handler", "resources", "robot.jar");
             } else {
-                jarPath = path.join(basePath, "src", "vendor", "kbm-robot", "resources", "robot.jar");
+                jarPath = path.join(basePath, "src", "vendor", "kbm-handler", "resources", "robot.jar");
             }
             // const jarPath = path.join("./resources/kbm-java", "robot.jar");
             if (!nativeHook) {

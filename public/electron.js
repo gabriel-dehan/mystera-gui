@@ -1,7 +1,7 @@
 const { BrowserWindow, app, screen } = require('electron');
 const path = require('path');
 const isDev = require('electron-is-dev');
-const robot = require("../src/Vendor/kbm-robot/kbm-robot");
+const robot = require("../src/Vendor/kbm-handler/kbm-robot");
 
 let mainWindow;
 
