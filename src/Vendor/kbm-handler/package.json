@@ -1,0 +1,25 @@
+{
+  "name": "kbm-robot",
+  "version": "0.0.7",
+  "description": "A module to help you emulate system wide keyboard and mouse actions.",
+  "main": "kbm-robot.js",
+  "scripts": {
+    "clean": "mvn clean",
+    "package": "mvn package",
+    "build": "mvn clean && mvn package",
+    "deploy:win": "npm run build && copy robot\\target\\robot.jar resources\\robot.jar && npm run clean",
+    "deploy:nix": "npm run build && cp ./robot/target/robot.jar ./resources/robot.jar && npm run clean"
+  },
+  "keywords": [
+    "keyboard",
+    "mouse",
+    "emulation",
+    "robot"
+  ],
+  "author": "Kyle Paulsen <kyle.a.paulsen@gmail.com> (http://www.kylepaulsen.com/)",
+  "repository": "https://github.com/kylepaulsen/kbm-robot",
+  "license": "MIT",
+  "dependencies": {
+    "promise": "^6.1.0"
+  }
+}
