@@ -3,7 +3,8 @@ import Store from 'electron-store';
 
 const schema = {
 	user: {
-		server: null,
+    server: null,
+    friends: [],
 	},
 };
 

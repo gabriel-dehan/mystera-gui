@@ -78,9 +78,10 @@ class Header extends Component {
           <Separator />
           <Button 
             icon={Help} 
-            iconSize="small"
+            iconWidth="38"
+            iconHeight="38"
             action={() => this.toggleHelp()} 
-            type="transparent" />
+            type="simple" />
         </Column>
       </Container>
     );

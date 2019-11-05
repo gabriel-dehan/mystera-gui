@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { remote }  from 'electron';
 
 const CONSTANTS = {
-  SKILL_MENU: 'skills' 
+  SKILL_MENU: 'skills',
+  WHISPER: 't'
 }
 
 // Not ideal, needs DOM to work
@@ -129,21 +130,39 @@ class RobotController {
     document.querySelector('iframe').contentWindow.focus();
   }
 
-  execute(command) {
+  initiateCommand(command, args = []) {
     this.sceneFocus();
     
+    const commandWithArgs = args.length > 0 ? `${command} ${args.join(' ')}` : `${command}`;
+
     this.robot
       .press("/")
       .delay()
       .release("/")
       .delay()
-      .typeString(`${command}`)
+      .typeString(`${commandWithArgs}`)
+      .go(function() {
+        console.log(`${commandWithArgs} executed!`);
+      });
+  }
+
+  execute(command, args) {
+    this.sceneFocus();
+    
+    const commandWithArgs = args.length > 0 ? `${command} ${args.join(' ')}` : `${command}`;
+
+    this.robot
+      .press("/")
+      .delay()
+      .release("/")
+      .delay()
+      .typeString(`${commandWithArgs}`)
       .press("enter")
       .delay()
       .release("enter")
       .go(function() {
-        console.log(`${command} executed!`);
-      })
+        console.log(`${commandWithArgs} executed!`);
+      });
   }
 }
 

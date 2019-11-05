@@ -24,6 +24,8 @@ function createWindow() {
     //BrowserWindow.addDevToolsExtension('<location to your react chrome extension>');
     mainWindow.webContents.openDevTools();
   }
+  mainWindow.webContents.setAudioMuted(true);
+
   mainWindow.on('closed', () => mainWindow = null);
   
   mainWindow.robot = robot;

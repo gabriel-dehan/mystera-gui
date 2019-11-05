@@ -10,6 +10,10 @@ export const Column = styled.div`
   margin-top: 3px;
   float: ${props => props.right ? 'right' : 'initial'};
   display: flex;
+
+  button:last-child {
+    padding-right: 3px;
+  }
 `;
 
 export const ServerSelect = styled.div`

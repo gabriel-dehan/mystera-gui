@@ -92,6 +92,15 @@ canvas {
 }
 
 /* button grey hover */
+.rpgui-button.primary,
+.rpgui-button.primary {
+  background-image: url("img/select-border-image-grey.png"); }
+
+.rpgui-button.primary.down,
+.rpgui-button.primary:active {
+  background-image: url("img/select-border-image-grey-light.png"); }
+
+/* button grey hover */
 .rpgui-button.grey.hover,
 .rpgui-button.grey:hover {
   background-image: url("img/button-grey-hover.png"); }
@@ -285,10 +294,28 @@ canvas {
   background-origin: padding-box;
   background-position: center; }
 
-  .rpgui-container.framed-dark {
+.rpgui-container.framed-dark {
+  /* border */
+  border-style: solid;
+  border-image-source: url("img/border-image-dark.png");
+  border-image-repeat: repeat;
+  border-image-slice: 6 6 6 6;
+  border-image-width: 12px;
+  border-width: 12px;
+  /* internal border */
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  /* background */
+  background: url("img/background-image.png") repeat repeat;
+  background-clip: padding-box;
+  background-origin: padding-box;
+  background-position: center; }
+
+  .rpgui-container.framed-dark-black {
     /* border */
     border-style: solid;
-    border-image-source: url("img/border-image-dark.png");
+    border-image-source: url("img/border-image-dark-black.png");
     border-image-repeat: repeat;
     border-image-slice: 6 6 6 6;
     border-image-width: 12px;
@@ -298,11 +325,12 @@ canvas {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     /* background */
-    background: url("img/background-image.png") repeat repeat;
+    background-color: #353535;
+    /*url("img/background-image-dark-black.png") repeat repeat;*/
     background-clip: padding-box;
     background-origin: padding-box;
-    background-position: center; }
-
+    background-position: center; }  
+  
 /* game div with golden background image*/
 .rpgui-container.framed-golden {
   /* border */
@@ -363,6 +391,26 @@ canvas {
   background-clip: padding-box;
   background-origin: padding-box;
   background-position: center; }
+
+.rpgui-container.framed-black {
+  /* border */
+  border-style: solid;
+  border-image-source: url("img/border-image-black.png");
+  border-image-repeat: repeat;
+  border-image-slice: 8 8 8 8;
+  border-image-width: 15px;
+  border-width: 14px;
+  padding: 0;
+  /* internal border */
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  /* background */
+  background: url("img/background-image-black.png") repeat repeat;
+  background-clip: padding-box;
+  background-origin: padding-box;
+  background-position: center; }
+
 
 /* game div with soft grey background image*/
 .rpgui-container.framed-grey {
@@ -593,7 +641,6 @@ ul.rpgui-dropdown-imp {
   text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
   font-size: 0.9em;
   line-height: 32px;
-  background: #4e4a4e;
   max-width: 100%;
   width: 100%;
   padding-left: 10px;
@@ -606,7 +653,12 @@ ul.rpgui-dropdown-imp {
   -moz-user-select: text;
   -ms-user-select: text;
   user-select: text;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.5); }
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.5); 
+
+  background: #272727;
+  border: 1px solid #4c453b;
+  border-radius: 3px;
+}
 
 /* textarea extra rules */
 .rpgui-content textarea {
@@ -639,12 +691,13 @@ ul.rpgui-dropdown-imp {
   /* border */
   border-style: solid;
   border-width: 7px 7px 7px 7px;
-  -moz-border-image: url("img/select-border-image.png") 10% repeat repeat;
-  -webkit-border-image: url("img/select-border-image.png") 10% repeat repeat;
-  -o-border-image: url("img/select-border-image.png") 10% repeat repeat;
-  border-image: url("img/select-border-image.png") 10% repeat repeat;
+  -moz-border-image: url("img/select-border-image-dark.png") 10% repeat repeat;
+  -webkit-border-image: url("img/select-border-image-dark.png") 10% repeat repeat;
+  -o-border-image: url("img/select-border-image.png-dark") 10% repeat repeat;
+  border-image: url("img/select-border-image-dark.png") 10% repeat repeat;
   /* background */
-  background: url("img/select-background-image.png") repeat repeat;
+  /* background: url("img/select-background-image.png") repeat repeat; */
+  background-color: #353535;
   background-clip: padding-box;
   background-origin: padding-box;
   background-position: center; }
@@ -660,7 +713,7 @@ ul.rpgui-list-imp {
   text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
   color: white;
   height: 16px;
-  margin-left: 5px !important;
+  margin-left: 0px !important;
   /* remove the dot */
   list-style-type: none;
   /* padding */
@@ -668,7 +721,7 @@ ul.rpgui-list-imp {
   padding-bottom: 6px;
   padding-left: 6px;
   /* background */
-  background: url("img/select-background-image.png") repeat repeat;
+  background-color: #323232;
   background-clip: padding-box;
   background-origin: padding-box;
   background-position: center; }

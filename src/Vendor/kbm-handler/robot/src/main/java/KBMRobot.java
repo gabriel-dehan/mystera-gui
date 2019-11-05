@@ -18,6 +18,9 @@ import org.jnativehook.mouse.NativeMouseInputListener;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
 
+/* http://roufid.com/3-ways-to-add-local-jar-to-maven-project/ */
+/* https://github.com/repeats/SimpleNativeHooks */
+
 public class KBMRobot {
 	public static void main(String[] args) {
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
