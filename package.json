@@ -11,6 +11,7 @@
     "electron-is-dev": "^1.1.0",
     "electron-localshortcut": "^3.1.0",
     "electron-store": "^5.1.0",
+    "lodash": "^4.17.15",
     "promise": "^8.0.3",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",

@@ -3,7 +3,10 @@ import { remote }  from 'electron';
 
 const CONSTANTS = {
   SKILL_MENU: 'skills',
-  WHISPER: 't'
+  WHISPER: 't',
+  ADD_FRIEND: 'friend add',
+  REMOVE_FRIEND: 'friend remove',
+  QUESTS: 'quests',
 }
 
 // Not ideal, needs DOM to work
@@ -142,11 +145,11 @@ class RobotController {
       .delay()
       .typeString(`${commandWithArgs}`)
       .go(function() {
-        console.log(`${commandWithArgs} executed!`);
+        console.log(`Command ${commandWithArgs} initiated!`);
       });
   }
 
-  execute(command, args) {
+  execute(command, args = []) {
     this.sceneFocus();
     
     const commandWithArgs = args.length > 0 ? `${command} ${args.join(' ')}` : `${command}`;
@@ -161,7 +164,7 @@ class RobotController {
       .delay()
       .release("enter")
       .go(function() {
-        console.log(`${commandWithArgs} executed!`);
+        console.log(`Command ${commandWithArgs} executed!`);
       });
   }
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import InterfaceController from '../../Providers/InterfaceController';
+import InterfaceController, { Symbols } from '../../Providers/InterfaceController';
 import Button from '../../Components/Button/Button';
 import FriendsModule from '../FriendsModule/FriendsModule';
 
@@ -9,6 +9,7 @@ import {
 } from './SidebarStyles.jsx'
 
 import Friends from '../../Assets/Images/Icons/friends_plus.png'
+import Quests from '../../Assets/Images/Icons/quests.png'
 
 // @interfaceController
 class Sidebar extends Component {
@@ -19,6 +20,10 @@ class Sidebar extends Component {
   toggleFriendsModule() {
     this.setState({ friendsModule: !this.state.friendsModule });
   }  
+
+  toggleQuests() {
+    this.props.controller.execute(Symbols.QUESTS);
+  }
 
   render() {
     return (
@@ -32,7 +37,14 @@ class Sidebar extends Component {
             type="primary" />
           {this.state.friendsModule && <FriendsModule />}
         </MenuItem>
-       
+        <MenuItem>
+          <Button 
+            icon={Quests} 
+            iconWidth="30"
+            iconHeight="30"
+            action={() => {this.toggleQuests()}} 
+            type="primary" />
+        </MenuItem>
       </Container>
     );
   }

@@ -21,10 +21,11 @@ class GameScreen extends Component {
 
   componentDidMount() {
     // We can't listen to keyboard events in an iframe but we need to capture keys so we use electronLocalshortcut to do so
-    console.log('HELLO');
     this.props.listener.start();
-    this.props.listener.commandAnalyzer();
-
+    this.props.listener.onExecuteCommand((command) => {
+      // TODO: Need a mobx store
+    });
+    
     // Send the current game window to the InterfaceController and InterfaceListener so that they knows what to work on
     this.props.controller.setCurrentGameWindow(document.querySelector('iframe'));
   }

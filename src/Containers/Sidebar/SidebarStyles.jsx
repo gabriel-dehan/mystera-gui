@@ -12,4 +12,5 @@ export const Container = styled.aside`
 
 export const MenuItem = styled.div`
   position: relative;
+  margin-bottom: 10px;
 `;

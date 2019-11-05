@@ -253,6 +253,18 @@ class KBMKeyboardListener implements NativeKeyListener {
 				}
 
 				switch (e.getKeyCode()) {
+					case NativeKeyEvent.VC_ENTER: {
+						sb.append("ENTER");
+						break;
+					}
+					case NativeKeyEvent.VC_ESCAPE: {
+						sb.append("ESCAPE");
+						break;
+					}
+					case NativeKeyEvent.VC_TAB: {
+						sb.append("TAB");
+						break;
+					}
 					case NativeKeyEvent.VC_SPACE: {
 						sb.append("SPACE");
 						break;

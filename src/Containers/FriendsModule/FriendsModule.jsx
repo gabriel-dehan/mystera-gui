@@ -49,6 +49,9 @@ class FriendsModule extends Component {
       friends = friends.filter((f) => f.name !== friend);
 
       store.set('user.friends', friends);
+
+      this.props.controller.execute(Symbols.REMOVE_FRIEND, [friend]);
+
       this.setState({ friends });
     }
   }
@@ -68,12 +71,15 @@ class FriendsModule extends Component {
 
       store.set('user.friends', friends);
       this.setState({ friends, userInput: '' });
+
+      this.props.controller.execute(Symbols.ADD_FRIEND, [this.state.userInput]);
+
       this.input.current.focus();
     }
   }
 
   onChatClick() {
-    this.props.controller.initiateCommand(Symbols.WHISPER, [this.userInput, " "]);
+    this.props.controller.initiateCommand(Symbols.WHISPER, [this.state.userInput, " "]);
   }
 
   render() {
