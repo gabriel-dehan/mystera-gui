@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import { observer, inject } from "mobx-react"
 import InterfaceController, { Symbols } from '../../Providers/InterfaceController';
-import withStore from '../../Providers/withStore';
 import UI from '../../Config/UIMappings';
 
 import Button from '../../Components/Button/Button';
@@ -34,11 +34,11 @@ class Header extends Component {
 
   selectServer(e) {   
     const serverId = e.target.value;
-    this.props.store.set('user.server', serverId);
+    this.props.settings.setServer(serverId);
   }
 
   clickServer() {
-    const serverId =  this.props.store.get('user.server');
+    const serverId =  this.props.settings.server;
     const { x, y } = UI.servers[serverId].coordinates;
     const loginX = UI.login.coordinates.x;
     const loginY = UI.login.coordinates.y;
@@ -55,7 +55,7 @@ class Header extends Component {
   }
 
   render() {
-    const defaultServer = this.props.store.get('user.server');
+    const defaultServer = this.props.settings.server;
         
     return (
       <Container className="rpgui-container framed-dark-grey">
@@ -88,4 +88,4 @@ class Header extends Component {
   }
 }
 
-export default withStore(InterfaceController(Header));
+export default inject("settings")(InterfaceController(observer(Header)));

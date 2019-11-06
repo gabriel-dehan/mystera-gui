@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import { observer, inject } from "mobx-react"
 import InterfaceController, { Symbols } from '../../Providers/InterfaceController';
-import withStore from '../../Providers/withStore';
 
 import Button from '../../Components/Button/Button';
 
@@ -26,7 +26,7 @@ class FriendsModule extends Component {
   state = {
     friendsModule: false,
     userInput: '',
-    friends: this.props.store.get('user.friends', [])
+    friends: this.props.user.friends
   }
 
   componentDidMount() {
@@ -43,16 +43,16 @@ class FriendsModule extends Component {
 
   removeFriend(friend) {
     if (friend.length > 0) {
-      const { store } = this.props;
-      let friends = store.get('user.friends', []);
+      const { user } = this.props;
+      let friends = user.friends;
       
       friends = friends.filter((f) => f.name !== friend);
 
-      store.set('user.friends', friends);
-
-      this.props.controller.execute(Symbols.REMOVE_FRIEND, [friend]);
-
       this.setState({ friends });
+
+      this.props.controller.execute(Symbols.REMOVE_FRIEND, [friend], () => {
+        user.setFriends(friends);
+      });
     }
   }
 
@@ -60,8 +60,8 @@ class FriendsModule extends Component {
     const friend = this.state.userInput;
 
     if (friend.length > 0) {
-      const { store } = this.props;
-      let friends = store.get('user.friends', []);
+      const { user } = this.props;
+      let friends = user.friends;
 
       const friendExists = friends.some((f) => f.name === friend);
 
@@ -69,22 +69,23 @@ class FriendsModule extends Component {
         friends.unshift({ name: friend, relationship: 0 });
       }
 
-      store.set('user.friends', friends);
       this.setState({ friends, userInput: '' });
 
-      this.props.controller.execute(Symbols.ADD_FRIEND, [this.state.userInput]);
-
-      this.input.current.focus();
+      // TODO: IMPORTANT -> PAUSE THE COMMAND ANALYZER 
+      this.props.controller.execute(Symbols.ADD_FRIEND, [this.state.userInput], () => {
+        user.setFriends(friends);
+        this.input.current.focus();
+      });
     }
   }
 
   onChatClick() {
+    this.props.controller.gameFocus();
     this.props.controller.initiateCommand(Symbols.WHISPER, [this.state.userInput, " "]);
   }
 
   render() {
-    const { store } = this.props;
-    const friends = store.get('user.friends', []);
+    const { user: { friends } } = this.props;
 
     return (
       <Container className="rpgui-container framed-dark-black">
@@ -113,4 +114,4 @@ class FriendsModule extends Component {
   }
 }
 
-export default withStore(InterfaceController(FriendsModule));
+export default inject("user")(InterfaceController(observer(FriendsModule)));

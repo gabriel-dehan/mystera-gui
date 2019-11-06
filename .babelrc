@@ -1,4 +1,5 @@
 {
+  "presets": ["mobx"],
   "plugins": [
     ["babel-plugin-styled-components"],  
     ["babel-plugin-webpack-alias"]

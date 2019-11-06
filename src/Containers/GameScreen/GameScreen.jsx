@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { observer, inject } from "mobx-react"
 import InterfaceController, { Symbols } from '../../Providers/InterfaceController';
 import InterfaceListener from '../../Providers/InterfaceListener';
 
@@ -11,7 +12,6 @@ import {
   Loader,
 } from './GameScreenStyles.jsx'
 
-// @interfaceController
 class GameScreen extends Component {
   state = {
     loaded: false
@@ -63,4 +63,4 @@ class GameScreen extends Component {
   }
 }
 
-export default InterfaceListener(InterfaceController(GameScreen));
+export default inject("settings")(InterfaceListener(InterfaceController(observer(GameScreen))));

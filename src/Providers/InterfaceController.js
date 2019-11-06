@@ -128,13 +128,13 @@ class RobotController {
   }
 
   // Used to on the game screen before inputing keyboard commands
-  sceneFocus() {
+  gameFocus() {
     // A bit ugly but works very well without needing to pass the component;
     document.querySelector('iframe').contentWindow.focus();
   }
 
-  initiateCommand(command, args = []) {
-    this.sceneFocus();
+  initiateCommand(command, args = [], callback = null) {
+    this.gameFocus();
     
     const commandWithArgs = args.length > 0 ? `${command} ${args.join(' ')}` : `${command}`;
 
@@ -146,11 +146,14 @@ class RobotController {
       .typeString(`${commandWithArgs}`)
       .go(function() {
         console.log(`Command ${commandWithArgs} initiated!`);
+        if (callback) {
+          callback();
+        }
       });
   }
 
-  execute(command, args = []) {
-    this.sceneFocus();
+  execute(command, args = [], callback = null) {
+    this.gameFocus();
     
     const commandWithArgs = args.length > 0 ? `${command} ${args.join(' ')}` : `${command}`;
 
@@ -165,6 +168,9 @@ class RobotController {
       .release("enter")
       .go(function() {
         console.log(`Command ${commandWithArgs} executed!`);
+        if (callback) {
+          callback();
+        }
       });
   }
 }
