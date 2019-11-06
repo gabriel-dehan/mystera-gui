@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { observer, inject } from "mobx-react"
-import InterfaceController, { Symbols } from '../../Providers/InterfaceController';
-import InterfaceListener from '../../Providers/InterfaceListener';
+import withInterfaceHandlers, { Symbols } from '../../Providers/withInterfaceHandlers';
 
 import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
@@ -21,12 +20,12 @@ class GameScreen extends Component {
 
   componentDidMount() {
     // We can't listen to keyboard events in an iframe but we need to capture keys so we use electronLocalshortcut to do so
-    this.props.listener.start();
-    this.props.listener.onExecuteCommand((command) => {
+    this.props.controller.listener.start();
+    this.props.controller.listener.onExecuteCommand((command) => {
       // TODO: Need a mobx store
     });
     
-    // Send the current game window to the InterfaceController and InterfaceListener so that they knows what to work on
+    // Send the current game window to the Interface Handlers that they knows what to work on
     this.props.controller.setCurrentGameWindow(document.querySelector('iframe'));
   }
 
@@ -63,4 +62,4 @@ class GameScreen extends Component {
   }
 }
 
-export default inject("settings")(InterfaceListener(InterfaceController(observer(GameScreen))));
+export default inject("settings")(withInterfaceHandlers(observer(GameScreen)));

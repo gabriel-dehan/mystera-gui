@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { observer, inject } from "mobx-react"
-import InterfaceController, { Symbols } from '../../Providers/InterfaceController';
+import withInterfaceHandlers, { Symbols } from '../../Providers/withInterfaceHandlers';
 
 import Button from '../../Components/Button/Button';
 
@@ -114,4 +114,4 @@ class FriendsModule extends Component {
   }
 }
 
-export default inject("user")(InterfaceController(observer(FriendsModule)));
+export default inject("user")(withInterfaceHandlers(observer(FriendsModule)));

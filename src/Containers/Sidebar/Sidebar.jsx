@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import InterfaceController, { Symbols } from '../../Providers/InterfaceController';
+import withInterfaceHandlers, { Symbols } from '../../Providers/withInterfaceHandlers';
 import Button from '../../Components/Button/Button';
 import FriendsModule from '../FriendsModule/FriendsModule';
 
@@ -50,4 +50,4 @@ class Sidebar extends Component {
   }
 }
 
-export default InterfaceController(Sidebar);
+export default withInterfaceHandlers(Sidebar);

@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 import { remote }  from 'electron';
 import { remove, isString, isRegExp, isEmpty } from 'lodash';
 import Mappings from '../Config/Mappings';
@@ -184,7 +183,7 @@ class Analyzer {
   // }
 }
 
-class Listener {
+class InterfaceListener {
   LETTERS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O' ,'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 
   constructor() {
@@ -286,28 +285,8 @@ class Listener {
   unregisterClickHandler() {
     this.controller.removeClickListener();
   }
-
-  // commandAnalyzer() {
-  //   if (this.mainWindow.isFocused() && this.gameWindowIsFocused()) {
-  //      electronLocalshortcut.register(this.mainWindow, '/', () => {
-  //      });
-  //   }
-  // }
 }
 
-export default (Child) => {
-  return class InterfaceListener extends Component {
-    constructor() {
-      super();
-      this.listener = new Listener();
-    }
+const Listener = new InterfaceListener();
 
-    render() {
-      return (
-        <Child {...this.props} listener={this.listener} />
-      )
-    }
-  }
-}
-
-
+export default Listener;

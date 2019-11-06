@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 import { remote }  from 'electron';
 
 const CONSTANTS = {
@@ -10,7 +9,7 @@ const CONSTANTS = {
 }
 
 // Not ideal, needs DOM to work
-class RobotController {
+class InterfaceController {
   constructor() {
     this.mainWindow = remote.getCurrentWindow();
     this.robot = this.mainWindow.robot;
@@ -176,22 +175,8 @@ class RobotController {
 }
 
 export const Symbols = CONSTANTS;
-export const Controller = new RobotController();
-
-export default (Child) => {
-  return class InterfaceController extends Component {
-    constructor() {
-      super();
-      this.controller = Controller;
-    }
-
-    render() {
-      return (
-        <Child {...this.props} controller={this.controller} />
-      )
-    }
-  }
-}
+const Controller = new InterfaceController();
+export default Controller;
 
 
 

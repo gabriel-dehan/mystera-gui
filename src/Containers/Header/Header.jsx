@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { observer, inject } from "mobx-react"
-import InterfaceController, { Symbols } from '../../Providers/InterfaceController';
+import withInterfaceHandlers, { Symbols } from '../../Providers/withInterfaceHandlers';
 import UI from '../../Config/UIMappings';
 
 import Button from '../../Components/Button/Button';
@@ -88,4 +88,4 @@ class Header extends Component {
   }
 }
 
-export default inject("settings")(InterfaceController(observer(Header)));
+export default inject("settings")(withInterfaceHandlers(observer(Header)));
