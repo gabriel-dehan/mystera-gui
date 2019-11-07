@@ -19,9 +19,9 @@ class GameScreen extends Component {
   loadingDelay = 1;// || 2500;
 
   componentDidMount() {
-    // We can't listen to keyboard events in an iframe but we need to capture keys so we use electronLocalshortcut to do so
-    this.props.controller.listener.start();
-    this.props.controller.listener.onExecuteCommand((command) => {
+    // We can't listen to keyboard events in an iframe but we need to capture keys so we use java
+    this.props.listener.start();
+    this.props.listener.onExecuteCommand((command) => {
       // TODO: Need a mobx store
     });
     

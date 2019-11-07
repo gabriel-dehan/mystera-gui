@@ -10,6 +10,9 @@ export default (Child) => {
       super();
       this.controller = Controller;
       this.listener = Listener;
+
+      this.listener.setController(this.controller);
+      this.controller.setListener(this.listener);
     }
 
     render() {

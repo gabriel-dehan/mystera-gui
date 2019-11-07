@@ -5,16 +5,20 @@ import UI from '../../Config/UIMappings';
 
 import Button from '../../Components/Button/Button';
 import HelpWindow from '../../Components/HelpWindow/HelpWindow';
+import SettingsWindow from '../SettingsWindow/SettingsWindow';
 
 import { 
   Container,
   Column,
   ServerSelect,
   Play,
+  ExitButtonContainer,
   Separator
 } from './HeaderStyles.jsx'
 
 import Help from '../../Assets/Images/Icons/help.png'
+import Exit from '../../Assets/Images/Icons/exit.png'
+import Settings from '../../Assets/Images/Icons/settings.png'
 
 class Header extends Component {
   constructor(props) {
@@ -25,6 +29,7 @@ class Header extends Component {
 
   state = {
     displayHelp: false,
+    displaySettings: false,
     serverClicked: false,
   }
 
@@ -54,6 +59,14 @@ class Header extends Component {
     this.setState({ displayHelp: !this.state.displayHelp });
   }
 
+  toggleSettings() {
+    this.setState({ displaySettings: !this.state.displaySettings });
+  }
+
+  exitGame() {
+    this.props.controller.execute(Symbols.QUIT);
+  }
+
   render() {
     const defaultServer = this.props.settings.server;
         
@@ -62,8 +75,11 @@ class Header extends Component {
         {this.state.displayHelp && 
         <HelpWindow onClose={() => this.toggleHelp()} />
         }
+        {this.state.displaySettings && 
+        <SettingsWindow onClose={() => this.toggleSettings()} />
+        }
 
-        <Column right>
+        <Column left>
           <React.Fragment>
             <ServerSelect>
               <select className="rpgui-dropdown" defaultValue={defaultServer} ref={this.serverSelect}>
@@ -75,6 +91,23 @@ class Header extends Component {
             </ServerSelect>
             <Play onClick={() => this.clickServer()} disabled={this.state.serverClicked} className="rpgui-button">Go</Play>
           </React.Fragment>
+        </Column>
+        <Column right>
+          <ExitButtonContainer>
+            <Button 
+              icon={Exit} 
+              iconWidth="32"
+              iconHeight="32"
+              action={() => this.exitGame()} 
+              type="simple" />
+          </ExitButtonContainer>
+          <Separator />
+          <Button 
+            icon={Settings} 
+            iconWidth="38"
+            iconHeight="38"
+            action={() => this.toggleSettings()} 
+            type="simple" />
           <Separator />
           <Button 
             icon={Help} 

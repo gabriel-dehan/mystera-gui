@@ -71,7 +71,6 @@ class FriendsModule extends Component {
 
       this.setState({ friends, userInput: '' });
 
-      // TODO: IMPORTANT -> PAUSE THE COMMAND ANALYZER 
       this.props.controller.execute(Symbols.ADD_FRIEND, [this.state.userInput], () => {
         user.setFriends(friends);
         this.input.current.focus();

@@ -8,11 +8,11 @@ export const Container = styled.header`
 
 export const Column = styled.div`
   margin-top: 3px;
-  float: ${props => props.right ? 'right' : 'initial'};
+  float: ${props => props.right ? 'right' : 'left'};
   display: flex;
 
   button:last-child {
-    padding-right: 3px;
+    padding-right: ${props => props.right ? '3px' : '15px'};
   }
 `;
 
@@ -37,4 +37,10 @@ export const Separator = styled.div`
   margin-left: 15px;
   padding-bottom: 9px;
   margin-bottom: 4px;
+`;
+
+export const ExitButtonContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

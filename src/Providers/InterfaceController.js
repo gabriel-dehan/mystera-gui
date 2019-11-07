@@ -6,6 +6,7 @@ const CONSTANTS = {
   ADD_FRIEND: 'friend add',
   REMOVE_FRIEND: 'friend remove',
   QUESTS: 'quests',
+  QUIT: 'quit',
 }
 
 // Not ideal, needs DOM to work
@@ -15,6 +16,10 @@ class InterfaceController {
     this.robot = this.mainWindow.robot;
     this.cursorPosition = null;
     this.baseGameWindow = this.mainWindow.baseGameWindow;
+  }
+
+  setListener(listener) {
+    this.listener = listener;
   }
 
   setCurrentGameWindow(gameWindowElement) {
@@ -133,6 +138,7 @@ class InterfaceController {
   }
 
   initiateCommand(command, args = [], callback = null) {
+    this.listener.stop();
     this.gameFocus();
     
     const commandWithArgs = args.length > 0 ? `${command} ${args.join(' ')}` : `${command}`;
@@ -143,15 +149,17 @@ class InterfaceController {
       .release("/")
       .delay()
       .typeString(`${commandWithArgs}`)
-      .go(function() {
-        console.log(`Command ${commandWithArgs} initiated!`);
+      .go(() => {
+        console.log(`Command /${commandWithArgs} initiated!`);
         if (callback) {
           callback();
+          this.listener.start();
         }
       });
   }
 
   execute(command, args = [], callback = null) {
+    this.listener.stop();
     this.gameFocus();
     
     const commandWithArgs = args.length > 0 ? `${command} ${args.join(' ')}` : `${command}`;
@@ -165,10 +173,11 @@ class InterfaceController {
       .press("enter")
       .delay()
       .release("enter")
-      .go(function() {
-        console.log(`Command ${commandWithArgs} executed!`);
+      .go(() => {
+        console.log(`Command /${commandWithArgs} executed!`);
         if (callback) {
           callback();
+          this.listener.start();
         }
       });
   }

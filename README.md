@@ -14,7 +14,7 @@ Craft ->
 
 ### Server choice & auto login
 
-[]
+[x]
 
 ### Costumes [v2]
 
@@ -28,6 +28,8 @@ Mystera GUI commands []
 Chat commands []
 
 ### Logout
+
+[x]
 
 ## Sidebar
 
@@ -142,3 +144,11 @@ All UI elements position mappings are in `src/Config/UI*.json` files.
 For all coordinate values, the value in the files have been compiled using a Browser window width of 1024px (930 * 522.66 actual game size (`canvas` element)).
 This means that for all relative positioning (needed to handle multiple resolutions and client window sizes), the code does a difference between the actual resolution and 930 * 522.66.
 If you ever want to map other in game UI elements, please make sure the `canvas` element dimensions are exactly the ones cited above.
+
+# History & Concepts
+
+The game, Mystera Legacy is a canvas game hosted on a website. I wanted to create a better interface for the game which is quite lacking.
+Obviously the game is a canvas which makes it impossible to retrieve any information. I might have been able to simulate clicks and input some data in it through a chrome extension but the features would have been even more limited.
+My choice was to go for an electron app that uses an underlying heavily modified Java/Node library (kbm-robot renamed kbm-handler) to capture keyboard and mouse events and conversly simulate click and typing. The Java application is spawned as a node child process that then listens and sends commands to it.
+
+The UI is a react & mobx application using local storage and the aformentionned system to listen to and simulate player inputs.
