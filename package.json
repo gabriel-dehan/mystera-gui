@@ -69,7 +69,7 @@
     "babel-plugin-styled-components": "^1.10.6",
     "babel-plugin-webpack-alias": "^2.1.2",
     "concurrently": "^5.0.0",
-    "electron": "^7.0.0",
+    "electron": "^9.4.0",
     "electron-builder": "^21.2.0",
     "wait-on": "^3.3.0"
   }
